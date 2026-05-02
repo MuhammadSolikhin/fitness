@@ -23,6 +23,15 @@
     </a>
   </div>
   <!-- /.login-logo -->
+  @if ($errors->any())
+      <div class="alert alert-danger mx-2 mt-2">
+          <ul class="mb-0">
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
@@ -38,10 +47,10 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" id="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+            <div class="input-group-text" onclick="togglePassword('password', 'togglePasswordIcon')" style="cursor: pointer;" title="Show/Hide Password">
+              <span class="fas fa-eye" id="togglePasswordIcon"></span>
             </div>
           </div>
         </div>
@@ -85,5 +94,20 @@
 <script src="{{ asset('assets/') }}plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/') }}dist/js/adminlte.min.js"></script>
+<script>
+    function togglePassword(inputId, iconId) {
+        var input = document.getElementById(inputId);
+        var icon = document.getElementById(iconId);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>
 </body>
 </html>

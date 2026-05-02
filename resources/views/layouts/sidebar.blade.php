@@ -105,8 +105,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.payments.index') }}"
-                            class="nav-link {{ request()->routeIs('admin.payments.*') ? 'active' : '' }}">
+                        <a href="{{ route('pelatih.payments.index') }}"
+                            class="nav-link {{ request()->routeIs('pelatih.payments.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cash-register"></i>
                             <p>Manajemen Pembayaran</p>
                         </a>

@@ -7,34 +7,52 @@
 @endsection
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-2">
         <div class="col-12">
-            <!-- Default box -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Dashboard Pelatih</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
+            <h5 class="mb-3">Selamat datang, {{ Auth::user()->name }}!</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $totalSchedules }}</h3>
+                    <p>Total Jadwal Mengajar</p>
                 </div>
-                
-                <div class="card-body">
-                    Selamat datang di Dashboard Pelatih.
+                <div class="icon">
+                    <i class="fas fa-calendar-alt"></i>
                 </div>
-                
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    Footer
-                </div>
-                <!-- /.card-footer-->
+                <a href="{{ route('pelatih.jadwal') }}" class="small-box-footer">Lihat Jadwal <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <!-- /.card -->
+        </div>
+        
+        <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{ $totalClasses }}</h3>
+                    <p>Total Kelas Saya</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <a href="{{ route('pelatih.kelas-saya') }}" class="small-box-footer">Lihat Kelas <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ $totalMembers }}</h3>
+                    <p>Total Anggota</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <a href="{{ route('pelatih.kelas-saya') }}" class="small-box-footer">Kelola Anggota <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
         </div>
     </div>
 </div>

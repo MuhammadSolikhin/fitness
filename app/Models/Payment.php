@@ -35,4 +35,14 @@ class Payment extends Model
     {
         return $this->belongsTo(Membership::class);
     }
+
+    public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id');
+    }
 }

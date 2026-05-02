@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classes;
+use App\Models\Payment;
 use App\Models\Schedule;
 use App\Models\User;
 use Carbon\Carbon;
@@ -12,7 +13,18 @@ class PelatihController extends Controller
 {
     public function dashboard()
     {
-        return view('pelatih.dashboard');
+        $pelatihId = Auth::id();
+        
+        $totalSchedules = Schedule::whereHas('class', function ($query) use ($pelatihId) {
+            $query->where('coach_id', $pelatihId);
+        })->count();
+
+        $totalClasses = Classes::where('coach_id', $pelatihId)->count();
+
+        $classes = Classes::where('coach_id', $pelatihId)->with('users')->get();
+        $totalMembers = $classes->flatMap->users->unique('id')->count();
+
+        return view('pelatih.dashboard', compact('totalSchedules', 'totalClasses', 'totalMembers'));
     }
 
     public function myClasses()
@@ -138,4 +150,16 @@ class PelatihController extends Controller
         return response()->json($events);
     }
 
+    public function payments()
+    {
+        $pelatihId = Auth::id();
+        $classIds = Classes::where('coach_id', $pelatihId)->pluck('id');
+        
+        $payments = Payment::with(['user', 'class'])
+            ->whereIn('class_id', $classIds)
+            ->latest()
+            ->paginate(10);
+            
+        return view('pelatih.payments.index', compact('payments'));
+    }
 }

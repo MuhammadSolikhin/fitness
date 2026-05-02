@@ -52,6 +52,7 @@ Route::middleware(['auth', 'role:pelatih'])->group(function () {
         ->name('pelatih.classes.updateMembership');
     Route::get('/pelatih/jadwal-mengajar', [PelatihController::class, 'jadwal'])->name('pelatih.jadwal');
     Route::get('/pelatih/jadwal-mengajar/events', [PelatihController::class, 'getEvents'])->name('pelatih.jadwal.events');
+    Route::get('/pelatih/payments', [PelatihController::class, 'payments'])->name('pelatih.payments.index');
 
 });
 
