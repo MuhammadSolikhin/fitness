@@ -61,7 +61,7 @@
                                             <input type="hidden" name="class_id" value="{{ $class->id }}">
                                             <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
                                             <button type="button" class="btn btn-sm btn-primary register-button"
-                                                data-id="{{ $schedule->id }}" data-remaining="{{$remaining}}">
+                                                data-id="{{ $schedule->id }}" data-class-id="{{ $class->id }}" data-remaining="{{$remaining}}">
                                                 Daftar
                                             </button>
                                         </form>
@@ -128,6 +128,7 @@
             buttons.forEach(button => {
                 button.addEventListener('click', function () {
                     const scheduleId = this.getAttribute('data-id');
+                    const classId = this.getAttribute('data-class-id');
                     const remainingRaw = this.getAttribute('data-remaining');
                     const remaining = remainingRaw === '' ? null : parseInt(remainingRaw);
                     const formId = `registerForm-${scheduleId}`;
@@ -148,7 +149,7 @@
                                     method: 'POST',
                                     data: {
                                         _token: '{{ csrf_token() }}',
-                                        class_id: scheduleId,
+                                        class_id: classId,
                                         schedule_id: scheduleId,
                                         amount: 50000
                                     },
