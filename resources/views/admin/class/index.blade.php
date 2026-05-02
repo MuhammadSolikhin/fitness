@@ -44,6 +44,7 @@
                                     <th>Nama Kelas</th>
                                     <th>Nama Sanggar</th>
                                     <th>Pelatih</th>
+                                    <th>Jumlah Peserta</th>
                                     <th>Gambar</th>
                                     <th>Deskripsi</th>
                                     <th>Dibuat</th>
@@ -57,6 +58,7 @@
                                         <td>{{ $class->name }}</td>
                                         <td>{{ $class->sanggar_name ?? '-' }}</td>
                                         <td>{{ $class->coach->name ?? '-' }}</td>
+                                        <td><span class="badge badge-info">{{ $class->users_count }} Peserta</span></td>
                                         <td>
                                             @if ($class->image_path)
                                                 <img src="{{ asset('storage/' . $class->image_path) }}" alt="gambar kelas"

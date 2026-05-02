@@ -14,7 +14,7 @@ class ClassController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Classes::with('coach');
+        $query = Classes::with('coach')->withCount('users');
 
         if ($search = $request->search) {
             $query->where('name', 'like', "%$search%")

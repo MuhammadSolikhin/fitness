@@ -140,7 +140,7 @@ class PelatihController extends Controller
 
         foreach ($schedules as $schedule) {
             $events[] = [
-                'title' => $schedule->class->sanggar_name . '<br>' . $schedule->class->name,
+                'title' => $schedule->class->sanggar_name . ' - ' . $schedule->class->name,
                 'start' => Carbon::parse($schedule->schedule_date . ' ' . $schedule->start_time)->toIso8601String(),
                 'end' => Carbon::parse($schedule->schedule_date . ' ' . $schedule->end_time)->toIso8601String(),
                 'color' => '#28a745',
