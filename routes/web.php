@@ -36,9 +36,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
         $date = $request->query('date');
         return Schedule::where('schedule_date', $date)->get(['start_time', 'end_time']);
     });
-    Route::get('/admin/payments', [PaymentController::class, 'index'])->name('payments.index');
-    Route::post('/admin/payments/{payment}/verify', [PaymentController::class, 'verify'])->name('payments.verify');
-    Route::post('/admin/payments/{payment}/reject', [PaymentController::class, 'reject'])->name('payments.reject');
     Route::get('/admin/payments/history', [PaymentController::class, 'history'])->name('payments.history');
 
 });

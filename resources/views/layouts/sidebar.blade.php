@@ -63,30 +63,12 @@
                             <p>Manajemen User</p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview {{ request()->routeIs('admin.payments.*') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.payments.*') ? 'active' : '' }}">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.payments.history') }}"
+                            class="nav-link {{ request()->routeIs('admin.payments.history') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cash-register"></i>
-                            <p>
-                                Pembayaran
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
+                            <p>History Pembayaran</p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.payments.index') }}"
-                                    class="nav-link {{ request()->routeIs('admin.payments.index') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Verifikasi Pembayaran</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.payments.history') }}"
-                                    class="nav-link {{ request()->routeIs('admin.payments.history') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>History Pembayaran</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
 

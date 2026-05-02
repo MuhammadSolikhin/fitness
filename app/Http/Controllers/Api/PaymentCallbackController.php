@@ -77,15 +77,25 @@ class PaymentCallbackController extends Controller
                         $membership->package = $payment->membership_package;
                         $membership->remaining_sessions += $sessionsToAdd; // Akumulasi sesi
                         $membership->save();
+
+                        // Sync to User table
+                        $user->is_membership = true;
+                        $user->membership_expired_at = $membership->end_date;
+                        $user->save();
                     } else {
                         // BUAT MEMBERSHIP BARU
-                        \App\Models\Membership::create([
+                        $newMembership = \App\Models\Membership::create([
                             'user_id' => $user->id,
                             'package' => $payment->membership_package,
                             'start_date' => now(),
                             'end_date' => now()->addMonths($monthsToAdd),
                             'remaining_sessions' => $sessionsToAdd,
                         ]);
+
+                        // Sync to User table
+                        $user->is_membership = true;
+                        $user->membership_expired_at = $newMembership->end_date;
+                        $user->save();
                     }
                 }
             } else if ($payment->type == 'per_class') {
