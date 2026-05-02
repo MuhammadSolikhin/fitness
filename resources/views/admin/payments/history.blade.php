@@ -101,6 +101,10 @@
                                         </div>
                                     </div>
                                 @endif
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">Tidak ada riwayat pembayaran yang tersedia.</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
