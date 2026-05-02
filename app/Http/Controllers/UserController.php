@@ -181,6 +181,7 @@ class UserController extends Controller
             'customer_details' => [
                 'first_name' => auth()->user()->name,
                 'email' => auth()->user()->email,
+                'phone' => '081234567890', // Tambahkan nomor HP dummy untuk mencegah Midtrans error 2603 (QR/GoPay)
             ],
             'item_details' => [
                 [

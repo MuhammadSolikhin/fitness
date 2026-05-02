@@ -88,6 +88,7 @@ class MembershipController extends Controller
                 'customer_details' => [
                     'first_name' => $user->name,
                     'email' => $user->email,
+                    'phone' => '081234567890', // Tambahkan nomor HP dummy untuk mencegah Midtrans error 2603 (QR/GoPay)
                 ],
                 'item_details' => [
                     [
