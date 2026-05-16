@@ -15,8 +15,11 @@
                     <div class="card-header">
                         <div class="row w-100">
                             <div class="col-md-6">
-                                <a href="{{ route('admin.classes.create') }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('admin.classes.create') }}" class="btn btn-primary btn-sm mr-2">
                                     <i class="fas fa-plus"></i> Tambah Kelas
+                                </a>
+                                <a href="{{ route('admin.classes.export') }}" class="btn btn-success btn-sm">
+                                    <i class="fas fa-file-excel"></i> Export Excel
                                 </a>
                             </div>
                             <div class="col-md-6 text-right">
@@ -73,11 +76,14 @@
                                         <td>{{ Str::limit($class->description, 50) }}</td>
                                         <td>{{ $class->created_at->format('d M Y') }}</td>
                                         <td>
-                                            <a href="{{ route('admin.classes.edit', $class) }}" class="btn btn-sm btn-warning">
+                                            <a href="{{ route('admin.classes.show', $class) }}" class="btn btn-sm btn-info" title="Detail Kelas">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('admin.classes.edit', $class) }}" class="btn btn-sm btn-warning" title="Edit Kelas">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-danger btn-delete"
-                                                data-id="{{ $class->id }}" data-name="{{ $class->name }}">
+                                                data-id="{{ $class->id }}" data-name="{{ $class->name }}" title="Hapus Kelas">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
 

@@ -39,7 +39,10 @@
                                 </form>
                             </div>
                             <div class="col-md-4 text-right">
-                                <a href="{{ route('admin.users.create') }}" class="btn btn-success mb-2">
+                                <a href="{{ route('admin.users.export') }}" class="btn btn-success mb-2 mr-2">
+                                    <i class="fas fa-file-excel"></i> Export Excel
+                                </a>
+                                <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-2">
                                     <i class="fas fa-plus"></i> Tambah User
                                 </a>
                             </div>

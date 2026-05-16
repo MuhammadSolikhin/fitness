@@ -30,4 +30,8 @@ class PaymentController extends Controller
         return view('admin.payments.history', compact('payments'));
     }
 
+    public function export()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\PaymentsExport, 'payments.xlsx');
+    }
 }

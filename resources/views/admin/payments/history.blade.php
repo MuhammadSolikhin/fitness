@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <form action="{{ route('admin.payments.history') }}" method="GET" class="form-inline">
                     <input type="text" name="search" class="form-control mr-2" placeholder="Cari nama pengguna"
                         value="{{ request('search') }}">
@@ -19,6 +19,11 @@
 
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </form>
+            </div>
+            <div class="col-md-4 text-right">
+                <a href="{{ route('admin.payments.export') }}" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i> Export Excel
+                </a>
             </div>
         </div>
         

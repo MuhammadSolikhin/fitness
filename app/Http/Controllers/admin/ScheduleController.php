@@ -117,4 +117,9 @@ class ScheduleController extends Controller
 
         return response()->json(['message' => 'Jadwal berhasil dihapus']);
     }
+
+    public function export()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\SchedulesExport, 'schedules.xlsx');
+    }
 }

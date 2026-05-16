@@ -68,7 +68,68 @@ class ClassController extends Controller
      */
     public function show(Classes $class)
     {
-        return view('admin.class.show', compact('class'));
+        $users = $class->users;
+        $schedules = \App\Models\Schedule::where('class_id', $class->id)->get()->keyBy('id');
+        $allUsers = User::where('role', 'user')->get();
+
+        return view('admin.class.show', compact('class', 'users', 'allUsers', 'schedules'));
+    }
+
+    public function addUser(Request $request, Classes $class)
+    {
+        $request->validate([
+            'register_type' => 'required|in:existing,new',
+            'schedule_id' => 'required|exists:schedules,id',
+            'is_paid_per_session' => 'sometimes|boolean',
+        ]);
+
+        if ($request->register_type === 'existing') {
+            $request->validate([
+                'user_id' => 'required|exists:users,id',
+            ]);
+            $userId = $request->user_id;
+        } else {
+            $request->validate([
+                'new_name' => 'required|string|max:255',
+                'new_email' => 'required|email|unique:users,email',
+            ]);
+            $user = User::create([
+                'name' => $request->new_name,
+                'email' => $request->new_email,
+                'role' => 'user',
+                'password' => bcrypt('password123'),
+            ]);
+            $userId = $user->id;
+        }
+
+        $alreadyExists = $class->users()
+            ->where('user_id', $userId)
+            ->wherePivot('schedule_id', $request->schedule_id)
+            ->exists();
+
+        if ($alreadyExists) {
+            return redirect()->back()->withErrors('User sudah terdaftar di kelas dan jadwal ini.');
+        }
+
+        $class->users()->attach($userId, [
+            'schedule_id' => $request->schedule_id,
+            'is_paid_per_session' => $request->has('is_paid_per_session'),
+        ]);
+
+        return redirect()->back()->with('success', 'User berhasil ditambahkan ke kelas.');
+    }
+
+    public function updateMembership(Request $request, Classes $class, User $user)
+    {
+        $data = $request->validate([
+            'is_paid_per_session' => 'required|boolean',
+        ]);
+
+        $class->users()->updateExistingPivot($user->id, [
+            'is_paid_per_session' => $data['is_paid_per_session'],
+        ]);
+
+        return redirect()->back()->with('success', 'Status membership berhasil diperbarui.');
     }
 
     /**
@@ -119,5 +180,10 @@ class ClassController extends Controller
         }
         $class->delete();
         return redirect()->route('admin.classes.index')->with('success', 'Kelas berhasil dihapus.');
+    }
+
+    public function export()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\ClassesExport, 'classes.xlsx');
     }
 }

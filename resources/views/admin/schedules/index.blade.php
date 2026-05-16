@@ -19,10 +19,14 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addScheduleModal">
-                    <i class="fas fa-plus"></i> Tambah Jadwal
-                </button>
-
+                <div>
+                    <button class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#addScheduleModal">
+                        <i class="fas fa-plus"></i> Tambah Jadwal
+                    </button>
+                    <a href="{{ route('admin.schedules.export') }}" class="btn btn-success btn-sm">
+                        <i class="fas fa-file-excel"></i> Export Excel
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 <div id="calendar"></div>

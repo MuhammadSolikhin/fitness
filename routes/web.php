@@ -38,6 +38,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     });
     Route::get('/admin/payments/history', [PaymentController::class, 'history'])->name('payments.history');
 
+    // Export Routes
+    Route::get('/users/export/excel', [AdminUserController::class, 'export'])->name('users.export');
+    Route::get('/classes/export/excel', [AdminClassesController::class, 'export'])->name('classes.export');
+    Route::get('/schedules/export/excel', [ScheduleController::class, 'export'])->name('schedules.export');
+    Route::get('/payments/export/excel', [PaymentController::class, 'export'])->name('payments.export');
+
+    Route::post('/classes/{class}/add-user', [AdminClassesController::class, 'addUser'])->name('classes.addUser');
+    Route::patch('/classes/{class}/users/{user}/membership', [AdminClassesController::class, 'updateMembership'])->name('classes.updateMembership');
 });
 
 Route::middleware(['auth', 'role:pelatih'])->group(function () {

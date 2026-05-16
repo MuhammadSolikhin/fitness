@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('dashboard') }}" class="brand-link d-flex align-items-center justify-content-center">
         <img src="{{ asset('assets/Foto/Logo Kurnia.png') }}" alt="Logo Kurnia" class="brand-image"
@@ -46,19 +46,19 @@
                 @if(auth()->user()->role == 'admin')
                     <!-- Menu untuk Admin -->
                     <li class="nav-item">
-                        <a href="{{ route('admin.classes.index') }}" class="nav-link">
+                        <a href="{{ route('admin.classes.index') }}" class="nav-link {{ request()->routeIs('admin.classes.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-chalkboard"></i>
                             <p>Manajemen Kelas</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.schedules.index') }}" class="nav-link">
+                        <a href="{{ route('admin.schedules.index') }}" class="nav-link {{ request()->routeIs('admin.schedules.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar-alt"></i>
                             <p>Manajemen Jadwal</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.users.index') }}" class="nav-link">
+                        <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Manajemen User</p>
                         </a>
@@ -75,13 +75,13 @@
                 @elseif(auth()->user()->role == 'pelatih')
                     <!-- Menu untuk Pelatih -->
                     <li class="nav-item">
-                        <a href="{{ route('pelatih.kelas-saya') }}" class="nav-link">
+                        <a href="{{ route('pelatih.kelas-saya') }}" class="nav-link {{ request()->routeIs('pelatih.kelas-saya') || request()->routeIs('pelatih.classes.show') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-chalkboard-teacher"></i>
                             <p>Kelas Saya</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('pelatih.jadwal') }}" class="nav-link">
+                        <a href="{{ route('pelatih.jadwal') }}" class="nav-link {{ request()->routeIs('pelatih.jadwal*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar-check"></i>
                             <p>Jadwal Mengajar</p>
                         </a>

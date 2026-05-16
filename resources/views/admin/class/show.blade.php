@@ -2,15 +2,27 @@
 
 @section('title', 'Detail Kelas')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.classes.index') }}">Manajemen Kelas</a></li>
+    <li class="breadcrumb-item active">Detail Kelas</li>
+@endsection
+
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="card mb-4">
             <div class="card-header">
                 <h3>{{ $class->name }}</h3>
             </div>
             <div class="card-body d-flex">
-                <img src="{{ asset('storage/' . $class->image_path) }}" width="150" height="150" class="mr-3 rounded"
-                    style="object-fit: cover;">
+                @if ($class->image_path)
+                    <img src="{{ asset('storage/' . $class->image_path) }}" width="150" height="150" class="mr-3 rounded"
+                        style="object-fit: cover;">
+                @else
+                    <div style="width: 150px; height: 150px; background-color: #e9ecef;" class="mr-3 rounded d-flex align-items-center justify-content-center text-muted">
+                        No Image
+                    </div>
+                @endif
                 <div>
                     <p><strong>Deskripsi:</strong> {{ $class->description }}</p>
                     <p><strong>Dibuat:</strong> {{ $class->created_at->format('d M Y') }}</p>
@@ -25,7 +37,7 @@
         <!-- Modal tambah user -->
         <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <form action="{{ route('pelatih.classes.addUser', $class->id) }}" method="POST" id="addUserForm">
+                <form action="{{ route('admin.classes.addUser', $class->id) }}" method="POST" id="addUserForm">
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
@@ -75,7 +87,7 @@
                                     @foreach($class->schedules as $schedule)
                                         <option value="{{ $schedule->id }}">
                                             {{ \Carbon\Carbon::parse($schedule->schedule_date)->format('d M Y') }} |
-                                            {{ $schedule->start_time }} - {{ $schedule->end_time }}
+                                            {{ \Carbon\Carbon::parse($schedule->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($schedule->end_time)->format('H:i') }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -134,7 +146,7 @@
                                                             <strong>{{ $user->name }}</strong> 
                                                             <small class="text-muted">({{ $user->email }})</small>
                                                         </div>
-                                                        <form action="{{ route('pelatih.classes.updateMembership', [$class->id, $user->id]) }}"
+                                                        <form action="{{ route('admin.classes.updateMembership', [$class->id, $user->id]) }}"
                                                             method="POST" class="d-flex align-items-center">
                                                             @csrf
                                                             @method('PATCH')
@@ -184,7 +196,7 @@
                                                         <strong>{{ $user->name }}</strong> 
                                                         <small class="text-muted">({{ $user->email }})</small>
                                                     </div>
-                                                    <form action="{{ route('pelatih.classes.updateMembership', [$class->id, $user->id]) }}"
+                                                    <form action="{{ route('admin.classes.updateMembership', [$class->id, $user->id]) }}"
                                                         method="POST" class="d-flex align-items-center">
                                                         @csrf
                                                         @method('PATCH')

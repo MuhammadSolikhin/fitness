@@ -1,0 +1,131 @@
+:root {
+    --purple-accent: #8e7cf6;
+    --purple-accent-hover: #7664e6;
+    --yellow-green: #d2f672;
+    --yellow-green-hover: #c4e95d;
+    --bg-light-grey: #ebebeb;
+}
+
+/* Background Override */
+body, .content-wrapper {
+    background-color: var(--bg-light-grey) !important;
+}
+
+/* Sidebar Active Link Override */
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, 
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: var(--purple-accent) !important;
+    color: #ffffff !important;
+    border-radius: 20px; 
+}
+
+/* Yellow accent for icon inside active sidebar link */
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active i.nav-icon, 
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active i.nav-icon {
+    color: var(--yellow-green) !important;
+}
+
+/* Sidebar Hover Link Override */
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:not(.active):hover, 
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link:not(.active):hover {
+    color: var(--purple-accent) !important;
+    background-color: rgba(142, 124, 246, 0.1) !important; /* Soft purple background */
+    border-radius: 20px;
+}
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:not(.active):hover i.nav-icon, 
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link:not(.active):hover i.nav-icon {
+    color: var(--purple-accent) !important;
+}
+
+/* Buttons Override */
+.btn-primary {
+    background-color: var(--purple-accent);
+    border-color: var(--purple-accent);
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: var(--purple-accent-hover) !important;
+    border-color: var(--purple-accent-hover) !important;
+}
+
+.btn-success, .btn-accent {
+    background-color: var(--yellow-green);
+    border-color: var(--yellow-green);
+    color: #000000;
+    font-weight: bold;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, 
+.btn-accent:hover, .btn-accent:focus, .btn-accent:active {
+    background-color: var(--yellow-green-hover) !important;
+    border-color: var(--yellow-green-hover) !important;
+    color: #000000 !important;
+}
+
+/* Navbar */
+.main-header.navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid var(--yellow-green);
+}
+
+/* Cards Override (matches rounded look in image) */
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: none;
+    border-top: 3px solid var(--purple-accent); /* Subtle top border */
+}
+.card-header {
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+}
+
+/* Card titles with yellow underline accent */
+.card-title, .card-header h3, .card-header h4 {
+    font-weight: bold;
+    color: var(--purple-accent);
+    border-bottom: 3px solid var(--yellow-green);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Custom list items like the image */
+.list-group-item-purple {
+    background-color: var(--purple-accent);
+    color: #ffffff;
+    border-radius: 20px !important;
+    margin-bottom: 10px;
+    border: none;
+}
+
+/* Pagination Active Override */
+.page-item.active .page-link {
+    background-color: var(--purple-accent) !important;
+    border-color: var(--purple-accent) !important;
+    color: var(--yellow-green) !important;
+    font-weight: bold;
+}
+.page-link {
+    color: var(--purple-accent);
+}
+
+/* Form Input Focus with Yellow Accent */
+.form-control:focus {
+    border-color: var(--purple-accent);
+    box-shadow: 0 0 0 0.2rem rgba(210, 246, 114, 0.5); /* Yellow-green glow */
+}
+
+/* Sidebar Collapsed Logo Override */
+body.sidebar-collapse .brand-link {
+    padding: 5px 0 !important;
+    text-align: center;
+    width: 100%;
+}
+body.sidebar-collapse .brand-link .brand-image {
+    max-height: 50px !important;
+    max-width: 90% !important;
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+    display: block !important;
+    object-fit: contain !important;
+}
